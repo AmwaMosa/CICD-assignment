@@ -38,7 +38,14 @@ jobs:
           fi
 
       # Step 4: Run Python tests
-      ####
+      - name: Run Python tests
+        run: |
+          pip install pytest  # Ensure pytest is installed
+          if [ -f pytest.ini ] || ls tests; then
+            pytest
+          else
+            echo "No tests found, skipping tests."
+          fi
 
   deploy:
     name: Deploy & Push to Docker Hub
